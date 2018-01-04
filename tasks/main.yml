@@ -18,7 +18,7 @@
 
 - name: Install required packages
   tags: liferay
-  with_items: liferay_package_list
+  with_items: "{{ liferay_package_list }}"
   action: "{{ ansible_pkg_mgr }} state=installed name={{ item }}"
 
 
@@ -90,7 +90,7 @@
 - name: enable read access for maintainance users
   tags: liferay
   command: usermod -a -G {{liferay_service_group}} {{item}}
-  with_items: liferay_system_users_access
+  with_items: "{{ liferay_system_users_access }}"
   ignore_errors: yes
   when: liferay_system_users_access is defined
   # We don't use the 'user' module here, because absent users should not be created.

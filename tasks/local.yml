@@ -1,5 +1,6 @@
 ---
 - name: Install local ansible data path directory (local)
+  become: false
   tags: liferay
   local_action: file
     state=directory
@@ -10,7 +11,7 @@
 
 - name: Download Tomcat bundle (local)
   tags: liferay
-  sudo: no
+  become: false
   local_action: get_url
     dest={{ local_ansible_data_path }}/{{ liferay_bundle_archive }}
     url={{ liferay_download_base_url }}/{{ liferay_bundle_archive }}
@@ -19,7 +20,7 @@
 
 - name: Download MySQL connector (local)
   tags: liferay
-  sudo: no
+  become: false
   local_action: get_url
     dest={{ local_ansible_data_path }}/{{ mysql_connector_archive }}
     url={{ mysql_connector_download_base_url }}/{{ mysql_connector_archive }}
